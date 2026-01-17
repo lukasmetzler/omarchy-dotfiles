@@ -97,6 +97,7 @@ mullvad-vpn
 nano
 nautilus
 neovim
+notion-app-enhanced
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji

@@ -74,17 +74,53 @@ fi
 
 echo "All tasks completed successfully!"
 
+echo "---------------------------------------"
+echo "Checking for Firmware Updates (lvfs)"
+echo "---------------------------------------"
+
+# Firmware update
+if command -v fwupdmgr &> /dev/null; then
+    echo "Refreshing firmware metadata..."
+    fwupdmgr refresh
+    echo "Checking and applying firmware updates..."
+    fwupdmgr update
+else
+    echo "fwupd is not installed. Skipping firmware update."
+fi
+
+
 # 7. Cleanup
 echo "---------------------------------------"
 echo "Cleanup..."
 echo "---------------------------------------"
+
+# Clean package cache and remove orphans
+if command -v yay &> /dev/null; then
+    yay -Sc --noconfirm
+    yay -Yc --noconfirm
+else
+    sudo pacman -Sc --noconfirm
+    sudo pacman -Rns $(pacman -Qtdq) 2>/dev/null
+fi
 
 # Remove temporary files and directories
 rm -rf "$BACKUP_DIR/tmp"
 
 echo "Cleanup completed!"
 
-# 8. Final Message
+#8. Health Check
+echo "---------------------------------------"
+echo "Final System Health Check..."
+echo "---------------------------------------"
+FAILED_SERVICES=$(systemctl --failed --no-legend)
+
+if [ -z "$FAILED_SERVICES" ]; then
+    echo "All systemd services are running correctly. Green status."
+else
+    echo "WARNING: The following services have failed:"
+    systemctl --failed
+fi
+
 echo "---------------------------------------"
 echo "Backup and Cleanup completed!"
 echo "---------------------------------------"

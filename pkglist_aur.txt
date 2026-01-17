@@ -1,6 +1,10 @@
 espanso-wayland
+http-parser
+http-parser-debug
 kdotool-bin
 mullvad-vpn
+notion-app-enhanced
+notion-app-enhanced-debug
 thinkfan
 thinkfan-tui
 vesktop-bin
