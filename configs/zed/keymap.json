@@ -9,14 +9,25 @@
   {
     "context": "Workspace",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
-    }
+      "super-n": "workspace::NewFile",
+      "super-w": "pane::CloseActiveItem",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "super-c": "editor::Copy",
+      "super-v": "editor::Paste",
+      "super-x": "editor::Cut",
+      "super-a": "editor::SelectAll",
+      "super-z": "editor::Undo",
+      "super-shift-z": "editor::Redo",
+    },
   },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
-      // "j k": "vim::NormalBefore"
-      "ctrl-s": "workspace::Save"
-    }
-  }
+      "ctrl-s": "workspace::Save",
+    },
+  },
 ]

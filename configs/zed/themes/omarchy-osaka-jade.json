@@ -1,0 +1,60 @@
+{
+  "$schema": "https://zed.dev/schema/themes/v0.1.0.json",
+  "name": "Omarchy Osaka Jade",
+  "author": "Lukas",
+  "themes": [
+    {
+      "name": "Omarchy Osaka Jade",
+      "appearance": "dark",
+      "style": {
+        "background": "#040b08",
+        "foreground": "#f6fbf9",
+        "accents": ["#3d9973"],
+        "ui": {
+          "background": "#040b08",
+          "panel.background": "#06110d",
+          "border": "#1b4634",
+          "text.muted": "#58bc93",
+          "tab.active_background": "#0b1d15",
+          "tab.inactive_background": "#040b08",
+          "status_bar.background": "#0b1d15",
+          "editor.active_line.background": "#0d231a",
+          "editor.selection.background": "#1e4b39",
+          "scrollbar.thumb.background": "#2c6e53",
+        },
+        "syntax": {
+          "keyword": {
+            "color": "#5ebf97",
+            "font_style": "normal",
+          },
+          "function": {
+            "color": "#3d9973",
+            "font_style": "italic",
+          },
+          "string": {
+            "color": "#9ed8c0",
+          },
+          "type": {
+            "color": "#7bcaaa",
+          },
+          "variable": {
+            "color": "#eaf6f1",
+          },
+          "constant": {
+            "color": "#87cfb1",
+          },
+          "comment": {
+            "color": "#358664",
+            "font_style": "italic",
+          },
+          "operator": {
+            "color": "#4db88b",
+          },
+          "punctuation": {
+            "color": "#58bc93",
+          },
+        },
+      },
+    },
+  ],
+}

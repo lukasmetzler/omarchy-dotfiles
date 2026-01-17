@@ -34,8 +34,8 @@
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Gruvbox Dark Hard"
+    "mode": "dark",
+    "light": "Everforest Light Hard (blur)",
+    "dark": "Everforest Dark Medium (regular)"
   }
 }

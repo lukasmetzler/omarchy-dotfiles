@@ -28,6 +28,7 @@ cp ~/.bashrc "$BACKUP_DIR/configs/.bashrc" 2>/dev/null
 rsync -av --delete ~/.config/espanso "$BACKUP_DIR/configs/"
 [ -d ~/.config/zed ] && rsync -av --delete ~/.config/zed "$BACKUP_DIR/configs/"
 [ -d ~/.config/zeditor ] && rsync -av --delete ~/.config/zeditor "$BACKUP_DIR/configs/"
+[ -d ~/.config/ghostty ] && rsync -av --delete ~/.config/ghostty "$BACKUP_DIR/configs/"
 
 # 4. Hyprland & Waybar
 echo "Backing up Hyprland & Waybar..."

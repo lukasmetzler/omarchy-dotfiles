@@ -5,6 +5,7 @@ base
 base-devel
 bash-completion
 bat
+blesh
 blueman
 bluetui
 bluez-utils
