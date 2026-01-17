@@ -18,6 +18,7 @@ cups
 cups-browsed
 cups-filters
 cups-pdf
+discord
 docker
 docker-buildx
 docker-compose
@@ -133,7 +134,6 @@ ruby
 rust
 satty
 sddm
-signal-desktop
 slurp
 snapper
 sof-firmware
