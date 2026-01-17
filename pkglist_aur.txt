@@ -1,0 +1,6 @@
+espanso-wayland
+kdotool-bin
+mullvad-vpn
+thinkfan
+thinkfan-tui
+vesktop-bin
