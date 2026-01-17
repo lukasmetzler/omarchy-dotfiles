@@ -56,3 +56,20 @@ else
 fi
 
 echo "Backup finished!"
+
+# 6. System Update
+echo "---------------------------------------"
+echo "Backup finished. Starting System Update..."
+echo "---------------------------------------"
+
+# Check if 'yay' is installed to update both System and AUR
+if command -v yay &> /dev/null; then
+    echo "Using 'yay' to update system and AUR packages..."
+    yay
+else
+    # Fallback to standard pacman if yay is not found
+    echo "Using 'pacman' to update system..."
+    sudo pacman -Syu
+fi
+
+echo "All tasks completed successfully!
