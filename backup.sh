@@ -5,7 +5,9 @@
 BACKUP_DIR="$HOME/Documents/omarchy-backup"
 DATE=$(date +"%Y-%m-%d_%H-%M")
 
+echo "---------------------------------------"
 echo "Starting System Backup..."
+echo "---------------------------------------"
 
 # 1. Ensures directory structure exists
 mkdir -p "$BACKUP_DIR/configs"
@@ -62,14 +64,27 @@ echo "---------------------------------------"
 echo "Backup finished. Starting System Update..."
 echo "---------------------------------------"
 
-# Check if 'yay' is installed to update both System and AUR
 if command -v yay &> /dev/null; then
     echo "Using 'yay' to update system and AUR packages..."
     yay
 else
-    # Fallback to standard pacman if yay is not found
     echo "Using 'pacman' to update system..."
     sudo pacman -Syu
 fi
 
-echo "All tasks completed successfully!
+echo "All tasks completed successfully!"
+
+# 7. Cleanup
+echo "---------------------------------------"
+echo "Cleanup..."
+echo "---------------------------------------"
+
+# Remove temporary files and directories
+rm -rf "$BACKUP_DIR/tmp"
+
+echo "Cleanup completed!"
+
+# 8. Final Message
+echo "---------------------------------------"
+echo "Backup and Cleanup completed!"
+echo "---------------------------------------"
