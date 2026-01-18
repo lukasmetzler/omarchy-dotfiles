@@ -1,4 +1,3 @@
-blesh
 espanso-wayland
 http-parser
 kdotool-bin
