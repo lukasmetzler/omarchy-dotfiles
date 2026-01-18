@@ -5,6 +5,7 @@ base
 base-devel
 bash-completion
 bat
+bind
 blueman
 bluetui
 bluez-utils
@@ -78,6 +79,7 @@ less
 libpulse
 libqalculate
 libreoffice-fresh
+libva-utils
 libyaml
 limine
 limine-mkinitcpio-hook
@@ -125,6 +127,7 @@ plymouth
 polkit-gnome
 postgresql-libs
 power-profiles-daemon
+profile-sync-daemon
 python-gobject
 python-poetry-core
 python-terminaltexteffects
