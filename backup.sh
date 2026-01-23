@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # --- CONFIGURATION ---
-# Destination directory for the backup
 BACKUP_DIR="$HOME/Documents/omarchy-backup"
 DATE=$(date +"%Y-%m-%d_%H-%M")
 
@@ -24,30 +23,20 @@ echo "Backing up general configurations..."
 cp ~/.zshrc "$BACKUP_DIR/configs/.zshrc" 2>/dev/null
 cp ~/.bashrc "$BACKUP_DIR/configs/.bashrc" 2>/dev/null
 
-# Apps
+# Apps & Chromium Flags (Neu hinzugefügt)
+echo "Backing up App configs (including Chromium flags)..."
 rsync -av --delete ~/.config/espanso "$BACKUP_DIR/configs/"
+[ -f ~/.config/chromium-flags.conf ] && cp ~/.config/chromium-flags.conf "$BACKUP_DIR/configs/"
 [ -d ~/.config/zed ] && rsync -av --delete ~/.config/zed "$BACKUP_DIR/configs/"
-[ -d ~/.config/zeditor ] && rsync -av --delete ~/.config/zeditor "$BACKUP_DIR/configs/"
 [ -d ~/.config/ghostty ] && rsync -av --delete ~/.config/ghostty "$BACKUP_DIR/configs/"
 
 # 4. Hyprland & Waybar
 echo "Backing up Hyprland & Waybar..."
-
-if [ -d ~/.config/hypr ]; then
-    rsync -av --delete ~/.config/hypr "$BACKUP_DIR/configs/"
-else
-    echo "Warning: No Hyprland folder found."
-fi
-
-if [ -d ~/.config/waybar ]; then
-    rsync -av --delete ~/.config/waybar "$BACKUP_DIR/configs/"
-else
-    echo "Warning: No Waybar folder found."
-fi
+[ -d ~/.config/hypr ] && rsync -av --delete ~/.config/hypr "$BACKUP_DIR/configs/"
+[ -d ~/.config/waybar ] && rsync -av --delete ~/.config/waybar "$BACKUP_DIR/configs/"
 
 # 5. Git Sync
 cd "$BACKUP_DIR"
-
 if [ -d .git ]; then
     echo "Git repository detected. Pushing to remote..."
     git add .
@@ -55,66 +44,53 @@ if [ -d .git ]; then
     git push
     echo "Backup pushed to GitHub successfully."
 else
-    echo "Warning: Not a git repository. Files saved locally, but not pushed."
+    echo "Warning: Not a git repository."
 fi
-
-echo "Backup finished!"
 
 # 6. System Update
 echo "---------------------------------------"
-echo "Backup finished. Starting System Update..."
+echo "Starting System Update..."
 echo "---------------------------------------"
-
 if command -v yay &> /dev/null; then
-    echo "Using 'yay' to update system and AUR packages..."
-    yay
+    yay --noconfirm
 else
-    echo "Using 'pacman' to update system..."
-    sudo pacman -Syu
+    sudo pacman -Syu --noconfirm
 fi
-
-echo "All tasks completed successfully!"
-
-echo "---------------------------------------"
-echo "Checking for Firmware Updates (lvfs)"
-echo "---------------------------------------"
 
 # Firmware update
+echo "---------------------------------------"
+echo "Checking for Firmware Updates..."
+echo "---------------------------------------"
 if command -v fwupdmgr &> /dev/null; then
-    echo "Refreshing firmware metadata..."
-    fwupdmgr refresh
-    echo "Checking and applying firmware updates..."
-    fwupdmgr update
-else
-    echo "fwupd is not installed. Skipping firmware update."
+    fwupdmgr refresh --force
+    fwupdmgr update -y
 fi
 
-
-# 7. Cleanup
+# 7. Fix: Robuster Cleanup
 echo "---------------------------------------"
 echo "Cleanup..."
 echo "---------------------------------------"
 
-# Clean package cache and remove orphans
+# Entferne zuerst verwaiste Download-Leichen, die den fd 7 Fehler verursachen
+sudo rm -f /var/cache/pacman/pkg/download-*
+
 if command -v yay &> /dev/null; then
+    # Entfernt alte Pakete, behält nur die installierten
     yay -Sc --noconfirm
+    # Entfernt ungenutzte Abhängigkeiten (Orphans)
     yay -Yc --noconfirm
 else
     sudo pacman -Sc --noconfirm
     sudo pacman -Rns $(pacman -Qtdq) 2>/dev/null
 fi
 
-# Remove temporary files and directories
-rm -rf "$BACKUP_DIR/tmp"
-
 echo "Cleanup completed!"
 
-#8. Health Check
+# 8. Health Check
 echo "---------------------------------------"
 echo "Final System Health Check..."
 echo "---------------------------------------"
 FAILED_SERVICES=$(systemctl --failed --no-legend)
-
 if [ -z "$FAILED_SERVICES" ]; then
     echo "All systemd services are running correctly. Green status."
 else
