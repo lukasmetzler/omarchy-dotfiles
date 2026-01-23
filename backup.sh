@@ -66,25 +66,25 @@ if command -v fwupdmgr &> /dev/null; then
     fwupdmgr update -y
 fi
 
-# 7. Fix: Robuster Cleanup
+# 7. Cleanup
 echo "---------------------------------------"
 echo "Cleanup..."
 echo "---------------------------------------"
 
-# Entferne zuerst verwaiste Download-Leichen, die den fd 7 Fehler verursachen
+sync
+
 sudo rm -f /var/cache/pacman/pkg/download-*
 
+echo "Cleaning pacman cache..."
+sudo pacman -Sc --noconfirm
+
 if command -v yay &> /dev/null; then
-    # Entfernt alte Pakete, behält nur die installierten
-    yay -Sc --noconfirm
-    # Entfernt ungenutzte Abhängigkeiten (Orphans)
+    echo "Cleaning AUR cache and orphans..."
+    yay -Sc --aur --noconfirm
     yay -Yc --noconfirm
-else
-    sudo pacman -Sc --noconfirm
-    sudo pacman -Rns $(pacman -Qtdq) 2>/dev/null
 fi
 
-echo "Cleanup completed!"
+sudo /usr/bin/pacman -D --check
 
 # 8. Health Check
 echo "---------------------------------------"
