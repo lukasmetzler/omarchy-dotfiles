@@ -136,6 +136,7 @@ rclone
 ripgrep
 ruby
 rust
+rust-analyzer
 satty
 sddm
 slurp
@@ -152,6 +153,7 @@ thinkfan
 thinkfan-tui
 timeshift
 tldr
+tmux
 tobi-try
 tree-sitter-cli
 ttf-cascadia-mono-nerd
