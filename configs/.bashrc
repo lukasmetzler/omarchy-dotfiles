@@ -16,3 +16,4 @@ source ~/.local/share/omarchy/default/bash/rc
 alias zed='zeditor'
 alias my-backup="$HOME/Documents/omarchy-backup/backup.sh"
 eval "$(starship init bash)"
+export mesa_glthread=true

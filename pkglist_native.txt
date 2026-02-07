@@ -76,6 +76,7 @@ kvantum-qt5
 lazydocker
 lazygit
 less
+lib32-vulkan-radeon
 libpulse
 libqalculate
 libreoffice-fresh
@@ -125,6 +126,7 @@ playerctl
 plocate
 plymouth
 polkit-gnome
+postgresql
 postgresql-libs
 power-profiles-daemon
 profile-sync-daemon
@@ -132,6 +134,7 @@ python-gobject
 python-poetry-core
 python-terminaltexteffects
 qt5-wayland
+radeontop
 rclone
 ripgrep
 ruby
@@ -184,6 +187,7 @@ woff2-font-awesome
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xdg-terminal-exec
+xf86-video-amdgpu
 xmlstarlet
 xournalpp
 yaru-icon-theme

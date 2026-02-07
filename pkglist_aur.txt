@@ -4,7 +4,6 @@ http-parser
 kdotool-bin
 mullvad-vpn
 notion-app-enhanced
-opencode
 thinkfan
 thinkfan-tui
 vesktop-bin
